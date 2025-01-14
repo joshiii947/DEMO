@@ -1,7 +1,6 @@
 package com.allica.demo.entity;
 
 import com.allica.demo.common.TransactionType;
-import com.fasterxml.jackson.annotation.JsonProperty;
 import jakarta.persistence.*;
 import org.springframework.stereotype.Component;
 
@@ -14,6 +13,17 @@ public class TransactionEntity {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
+    @ManyToOne
+    @JoinColumn(name = "account_id", referencedColumnName = "account_number", nullable = false)
+    private AccountEntity accountId;
+    @Column(name = "transaction_id", unique = true, nullable = false)
+    private String transactionId;
+    @Column(name = "amount", nullable = false)
+    private String amount;
+    @Enumerated(EnumType.STRING)
+    private TransactionType transactionEntity;
+    @Column(name = "transactionTime")
+    private LocalDateTime transactionDate;
 
     public Long getId() {
         return id;
@@ -62,22 +72,6 @@ public class TransactionEntity {
     public void setTransactionDate(LocalDateTime transactionDate) {
         this.transactionDate = transactionDate;
     }
-
-    @ManyToOne
-    @JoinColumn(name = "account_id", referencedColumnName = "account_number", nullable = false)
-    private AccountEntity accountId;
-
-    @Column(name="transaction_id",unique = true, nullable = false)
-    private String transactionId;
-
-    @Column(name="amount", nullable = false)
-    private String amount;
-
-    @Enumerated(EnumType.STRING)
-    private TransactionType transactionEntity;
-
-    @Column(name="transactionTime")
-    private LocalDateTime transactionDate;
 
 }
 

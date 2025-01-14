@@ -3,6 +3,9 @@ package com.allica.demo.resource;
 
 public class AccountResource {
 
+    private String customerId;
+    private String accountNumber;
+
     public String getCustomerId() {
         return customerId;
     }
@@ -18,9 +21,5 @@ public class AccountResource {
     public void setAccountNumber(String accountNumber) {
         this.accountNumber = accountNumber;
     }
-
-    private String customerId;
-
-    private String accountNumber;
 
 }

@@ -8,6 +8,13 @@ import jakarta.validation.constraints.Size;
 @JsonIgnoreProperties(ignoreUnknown = true)
 public class CustomerRequestResource {
 
+    @JsonProperty("customer_id")
+    private String customerId;
+    @NotNull(message = "Name cannot be null")
+    @Size(min = 3, max = 50, message = "Name must be between 7 and 50 characters")
+    @JsonProperty("person_name")
+    private String name;
+
     public String getCustomerId() {
         return customerId;
     }
@@ -23,12 +30,4 @@ public class CustomerRequestResource {
     public void setName(String name) {
         this.name = name;
     }
-
-    @JsonProperty("customer_id")
-    private String customerId;
-
-    @NotNull(message = "Name cannot be null")
-    @Size(min = 3, max = 50, message = "Name must be between 7 and 50 characters")
-    @JsonProperty("person_name")
-    private String name;
 }

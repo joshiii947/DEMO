@@ -7,6 +7,17 @@ import java.time.LocalDateTime;
 
 public class TransactionResponseResource {
 
+    @JsonProperty("transaction_type")
+    private TransactionType transactionType;
+    @JsonProperty("transaction_amount")
+    private String transactionAmount;
+    @JsonProperty("transaction_time")
+    private LocalDateTime transactionTime;
+    @JsonProperty("account_number")
+    private String accountNumber;
+    @JsonProperty("transaction_number")
+    private String transactionNumber;
+
     public TransactionType getTransactionType() {
         return transactionType;
     }
@@ -39,15 +50,11 @@ public class TransactionResponseResource {
         this.accountNumber = accountNumber;
     }
 
-    @JsonProperty("transaction_type")
-    private TransactionType transactionType;
+    public String getTransactionNumber() {
+        return transactionNumber;
+    }
 
-    @JsonProperty("transaction_amount")
-    private String transactionAmount;
-
-    @JsonProperty("transaction_time")
-    private LocalDateTime transactionTime;
-
-    @JsonProperty("account_number")
-    private String accountNumber;
+    public void setTransactionNumber(String transactionNumber) {
+        this.transactionNumber = transactionNumber;
+    }
 }

@@ -11,14 +11,13 @@ import java.math.BigDecimal;
 @Component
 public class AccountValidation {
 
-
-    public static void isValidaAccountAndTransactionValid(TransactionRequestResource resource, AccountEntity accountEntity){
-        if(accountEntity==null){
-            throw new BaseRequestException("Account is not exist and not created {}",resource.getAccountNumber());
+    public static void isValidaAccountAndTransactionValid(TransactionRequestResource resource, AccountEntity accountEntity) {
+        if (accountEntity == null) {
+            throw new BaseRequestException(String.format("Account is not exist and not created %s", resource.getAccountNumber()));
         }
 
-        if(resource.getTransactionType().equals(TransactionType.DEBIT) && isAmountLessThan(accountEntity.getAmount(),resource.getAmount())){
-            throw new BaseRequestException("Amount debited is less than the amount in the accountBalance {}",resource.getAccountNumber());
+        if (resource.getTransactionType().equals(TransactionType.DEBIT) && isAmountLessThan(accountEntity.getAmount(), resource.getAmount())) {
+            throw new BaseRequestException(String.format("Amount debited is less than the amount in the accountBalance %s", resource.getAmount()));
         }
     }
 
@@ -30,5 +29,4 @@ public class AccountValidation {
         // Compare values
         return value1.compareTo(value2) < 0;
     }
-
 }

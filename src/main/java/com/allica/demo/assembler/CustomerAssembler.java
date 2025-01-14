@@ -16,7 +16,6 @@ public class CustomerAssembler {
         accountEntity.setAmount("0");
         return accountEntity;
     }
-
     public CustomerEntity getCustomerEntity(CustomerRequestResource customerRequestResource) {
         CustomerEntity customerEntity = new CustomerEntity();
         customerEntity.setCustomerId(customerRequestResource.getCustomerId());

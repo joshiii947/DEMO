@@ -3,6 +3,13 @@ package com.allica.demo.resource;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
 public class CustomerResponseResource {
+    @JsonProperty("customer_name")
+    private String customerName;
+    @JsonProperty("account_number")
+    private String accountNumber;
+    @JsonProperty("customer_id")
+    private String customerId;
+
     public String getCustomerName() {
         return customerName;
     }
@@ -26,13 +33,4 @@ public class CustomerResponseResource {
     public void setCustomerId(String customerId) {
         this.customerId = customerId;
     }
-
-    @JsonProperty("customer_name")
-    private String customerName;
-
-    @JsonProperty("account_number")
-    private String accountNumber;
-
-    @JsonProperty("customer_id")
-    private String customerId;
 }

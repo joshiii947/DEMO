@@ -1,5 +1,6 @@
 package com.allica.demo.controller;
 
+import com.allica.demo.exception.BaseRequestException;
 import com.allica.demo.resource.CustomerRequestResource;
 import com.allica.demo.resource.CustomerResponseResource;
 import com.allica.demo.service.CustomerService;
@@ -17,13 +18,14 @@ public class CustomerController {
 
     @Autowired
     private CustomerService customerService;
-
-
     @PostMapping("/saveCustomerInfo")
     public ResponseEntity<CustomerResponseResource> saveCustomerInfo(@RequestBody CustomerRequestResource customerRequestResource){
-
-        CustomerResponseResource customerResponseResource=customerService.saveCustomerInfo(customerRequestResource);
-
+        CustomerResponseResource customerResponseResource =null;
+        try {
+             customerResponseResource = customerService.saveCustomerInfo(customerRequestResource);
+        }catch (BaseRequestException baseRequestException){
+            throw new BaseRequestException(baseRequestException.getMessage());
+        }
         return new ResponseEntity<>(customerResponseResource,HttpStatus.OK);
     }
 }

@@ -9,6 +9,14 @@ import org.springframework.stereotype.Component;
 @Data
 public class CustomerEntity {
 
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long id;
+    @Column(name = "customer_id", unique = true)
+    private String customerId;
+    @Column(name = "customerName", nullable = false)
+    private String name;
+
     public Long getId() {
         return id;
     }
@@ -32,14 +40,4 @@ public class CustomerEntity {
     public void setName(String name) {
         this.name = name;
     }
-
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
-
-    @Column(name = "customer_id", unique = true)
-    private String customerId;
-
-    @Column(name = "customerName", nullable = false)
-    private String name;
 }
