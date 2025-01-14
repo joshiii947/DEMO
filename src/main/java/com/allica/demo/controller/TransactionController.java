@@ -16,16 +16,13 @@ public class TransactionController {
     private TransactionService transactionService;
 
 
-    @GetMapping("/getTransactionInfo/{transactionId}/{accountId}")
-    public ResponseEntity<String> getTransactinInfo(@PathVariable("transactionId") String transactionId,
-                                                    @PathVariable("accountId") String accountId){
-
+    @GetMapping("/getTransactionInfo")
+    public ResponseEntity<String> getTransactinInfo(){
         return new ResponseEntity<>(HttpStatus.OK);
     }
 
     @PostMapping("/saveTransactionInfo")
     public ResponseEntity<String> saveTransactionInfo(@Validated TransactionRequestResource transactionRequestResource){
-
         return new ResponseEntity<>(HttpStatus.OK);
     }
 }
