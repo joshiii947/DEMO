@@ -1,6 +1,7 @@
 package com.allica.demo.controller;
 
 import com.allica.demo.resource.CustomerRequestResource;
+import com.allica.demo.resource.CustomerResponseResource;
 import com.allica.demo.service.CustomerService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -21,7 +22,7 @@ public class CustomerController {
     @GetMapping("/saveCustomerInfo")
     public ResponseEntity<String> saveCustomerInfo(@Validated CustomerRequestResource customerRequestResource){
 
-
+        CustomerResponseResource customerResponseResource=customerService.saveCustomerInfo(customerRequestResource);
 
         return new ResponseEntity<>(HttpStatus.OK);
     }
