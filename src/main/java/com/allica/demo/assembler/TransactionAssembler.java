@@ -16,6 +16,7 @@ import java.util.UUID;
 @Component
 public class TransactionAssembler {
 
+    // Retrieve TransactionResponseReource
     public List<TransactionResponseResource> getTransactionResponseResource(Page<TransactionEntity> transactionEntityPage) {
         return transactionEntityPage.getContent().stream()
                 .map(this::convertToResponseResource)
@@ -32,6 +33,7 @@ public class TransactionAssembler {
         return response;
     }
 
+    // Used to return the transactionResponseResource
     public TransactionResponseResource getTransactionResponseResource(TransactionEntity transactionEntity, TransactionType transactionType) {
         TransactionResponseResource resource = new TransactionResponseResource();
         resource.setTransactionTime(transactionEntity.getTransactionDate());
@@ -42,6 +44,7 @@ public class TransactionAssembler {
         return resource;
     }
 
+    // To save the info in the db for transactionEntity
     public TransactionEntity getTransactionEntity(AccountEntity accountEntity, TransactionRequestResource resource) {
         TransactionEntity transactionEntity = new TransactionEntity();
         transactionEntity.setAccountId(accountEntity);
