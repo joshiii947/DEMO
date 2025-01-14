@@ -11,11 +11,3 @@ public class DemoApplication {
 	}
 
 }
-
-////
-////    Customer
-////            Save
-////    Get
-////            Transactions
-////Get
-////
