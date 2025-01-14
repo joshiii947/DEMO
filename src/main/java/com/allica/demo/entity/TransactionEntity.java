@@ -14,6 +14,54 @@ public class TransactionEntity {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
+    public Long getId() {
+        return id;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
+    }
+
+    public AccountEntity getAccountId() {
+        return accountId;
+    }
+
+    public void setAccountId(AccountEntity accountId) {
+        this.accountId = accountId;
+    }
+
+    public String getTransactionId() {
+        return transactionId;
+    }
+
+    public void setTransactionId(String transactionId) {
+        this.transactionId = transactionId;
+    }
+
+    public String getAmount() {
+        return amount;
+    }
+
+    public void setAmount(String amount) {
+        this.amount = amount;
+    }
+
+    public TransactionType getTransactionEntity() {
+        return transactionEntity;
+    }
+
+    public void setTransactionEntity(TransactionType transactionEntity) {
+        this.transactionEntity = transactionEntity;
+    }
+
+    public LocalDateTime getTransactionDate() {
+        return transactionDate;
+    }
+
+    public void setTransactionDate(LocalDateTime transactionDate) {
+        this.transactionDate = transactionDate;
+    }
+
     @ManyToOne
     @JoinColumn(name = "account_id", referencedColumnName = "account_number", nullable = false)
     private AccountEntity accountId;

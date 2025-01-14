@@ -13,8 +13,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import java.util.Optional;
-
 import static com.allica.demo.common.Constants.ACCOUNT_NUMBER_LENGTH;
 
 @Service
@@ -31,16 +29,16 @@ public class CustomerServiceImpl implements CustomerService {
 
     @Override
     public CustomerResponseResource saveCustomerInfo(CustomerRequestResource customerRequestResource) {
-        getCustomerId(customerRequestResource);
+        CustomerEntity customerEntity = getCustomerId(customerRequestResource);
 
         boolean isUniqueAccountNumberNotGenerated = true;
         String accountNumber = Constants.generateRandomNumber(ACCOUNT_NUMBER_LENGTH);
         while (isUniqueAccountNumberNotGenerated) {
-            if (accountRepo.checkIfAccountNumberExist(accountNumber).isEmpty()) {
+            if (!accountRepo.checkIfAccountNumberExist(accountNumber)) {
                 isUniqueAccountNumberNotGenerated = false;
             }
         }
-        AccountEntity accountEntity = customerAssembler.getAccountEntityInfo(customerRequestResource, accountNumber);
+        AccountEntity accountEntity = customerAssembler.getAccountEntityInfo(customerRequestResource, accountNumber, customerEntity);
         saveInfoIndbForAccountEntity(accountEntity);
 
         return customerAssembler.getCustomerResponseResource(accountEntity, customerRequestResource);
@@ -51,20 +49,22 @@ public class CustomerServiceImpl implements CustomerService {
         accountRepo.save(accountEntity);
     }
 
-    private void getCustomerId(CustomerRequestResource customerRequestResource) {
+    private CustomerEntity getCustomerId(CustomerRequestResource customerRequestResource) {
         if (customerRequestResource.getCustomerId() == null) {
             customerRequestResource.setCustomerId(Constants.generateRandomCustomerId(customerRequestResource.getName()));
         }
 
-        Optional<CustomerEntity> customerEntityOptional = customerRepo.getCustomerEntityInfo(customerRequestResource.getCustomerId());
-        if (customerEntityOptional.isEmpty()) {
-            saveInfoInDb(customerRequestResource);
+        CustomerEntity customerEntityOptional = customerRepo.getCustomerEntityInfo(customerRequestResource.getCustomerId());
+        if (customerEntityOptional == null) {
+            customerEntityOptional = saveInfoInDb(customerRequestResource);
         }
+
+        return customerEntityOptional;
     }
 
     @Transactional
-    private void saveInfoInDb(CustomerRequestResource customerRequestResource) {
+    private CustomerEntity saveInfoInDb(CustomerRequestResource customerRequestResource) {
         CustomerEntity customerEntity = customerAssembler.getCustomerEntity(customerRequestResource);
-        customerRepo.save(customerEntity);
+        return customerRepo.save(customerEntity);
     }
 }

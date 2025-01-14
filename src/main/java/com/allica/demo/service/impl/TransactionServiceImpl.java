@@ -6,8 +6,6 @@ import org.springframework.stereotype.Service;
 
 @Service
 public class TransactionServiceImpl implements TransactionService {
-
-
     @Override
     public void saveTransactionInfo(TransactionRequestResource resource) {
 

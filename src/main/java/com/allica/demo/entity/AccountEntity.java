@@ -9,6 +9,30 @@ import org.springframework.stereotype.Component;
 @Data
 public class AccountEntity {
 
+    public Long getId() {
+        return id;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
+    }
+
+    public CustomerEntity getCustomerId() {
+        return customerId;
+    }
+
+    public void setCustomerId(CustomerEntity customerId) {
+        this.customerId = customerId;
+    }
+
+    public String getAccountNumber() {
+        return accountNumber;
+    }
+
+    public void setAccountNumber(String accountNumber) {
+        this.accountNumber = accountNumber;
+    }
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;

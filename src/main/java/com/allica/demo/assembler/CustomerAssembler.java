@@ -9,10 +9,10 @@ import org.springframework.stereotype.Component;
 @Component
 public class CustomerAssembler {
 
-    public AccountEntity getAccountEntityInfo(CustomerRequestResource resource, String accountNumber) {
+    public AccountEntity getAccountEntityInfo(CustomerRequestResource resource, String accountNumber, CustomerEntity customerEntity) {
         AccountEntity accountEntity = new AccountEntity();
         accountEntity.setAccountNumber(accountNumber);
-
+        accountEntity.setCustomerId(customerEntity);
         return accountEntity;
     }
 
