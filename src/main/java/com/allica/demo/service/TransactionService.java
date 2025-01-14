@@ -1,10 +1,11 @@
 package com.allica.demo.service;
 
 import com.allica.demo.resource.TransactionRequestResource;
+import com.allica.demo.resource.TransactionResponseResource;
 
 public interface TransactionService {
 
-    public void saveTransactionInfo(TransactionRequestResource resource);
+    public TransactionResponseResource createTransactionForUser(TransactionRequestResource resource);
 
 
 }

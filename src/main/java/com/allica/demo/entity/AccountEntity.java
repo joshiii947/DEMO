@@ -1,12 +1,10 @@
 package com.allica.demo.entity;
 
 import jakarta.persistence.*;
-import lombok.Data;
 import org.springframework.stereotype.Component;
 
 @Component
 @Entity
-@Data
 public class AccountEntity {
 
     public Long getId() {
@@ -43,4 +41,15 @@ public class AccountEntity {
 
     @Column(name = "account_number", unique = true, nullable = false)
     private String accountNumber;
+
+    public String getAmount() {
+        return amount;
+    }
+
+    public void setAmount(String amount) {
+        this.amount = amount;
+    }
+
+    @Column(name = "amount")
+    private String amount;
 }

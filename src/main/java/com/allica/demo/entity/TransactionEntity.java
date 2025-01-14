@@ -1,6 +1,7 @@
 package com.allica.demo.entity;
 
 import com.allica.demo.common.TransactionType;
+import com.fasterxml.jackson.annotation.JsonProperty;
 import jakarta.persistence.*;
 import org.springframework.stereotype.Component;
 
@@ -75,6 +76,7 @@ public class TransactionEntity {
     @Enumerated(EnumType.STRING)
     private TransactionType transactionEntity;
 
+    @Column(name="transactionTime")
     private LocalDateTime transactionDate;
 
 }

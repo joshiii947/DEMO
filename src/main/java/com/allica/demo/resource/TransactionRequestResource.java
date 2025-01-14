@@ -2,9 +2,10 @@ package com.allica.demo.resource;
 
 import com.allica.demo.common.TransactionType;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
-import lombok.Data;
+import com.fasterxml.jackson.annotation.JsonProperty;
+import jakarta.validation.constraints.NotNull;
+import jakarta.validation.constraints.Pattern;
 
-@Data
 @JsonIgnoreProperties(ignoreUnknown = true)
 public class TransactionRequestResource {
 
@@ -14,14 +15,6 @@ public class TransactionRequestResource {
 
     public void setAccountNumber(String accountNumber) {
         this.accountNumber = accountNumber;
-    }
-
-    public String getTransactionId() {
-        return transactionId;
-    }
-
-    public void setTransactionId(String transactionId) {
-        this.transactionId = transactionId;
     }
 
     public String getAmount() {
@@ -40,21 +33,17 @@ public class TransactionRequestResource {
         this.transactionType = transactionType;
     }
 
-    public String getTransactionDate() {
-        return transactionDate;
-    }
-
-    public void setTransactionDate(String transactionDate) {
-        this.transactionDate = transactionDate;
-    }
-
+    @JsonProperty("account_number")
+    @NotNull(message = "Account number cannot be null")
     private String accountNumber;
 
-    private String transactionId;
-
+    @JsonProperty("amount")
+    @NotNull(message = "Amount cannot be null") // Ensures the amount is not null
+    @Pattern(regexp = "^[0-9]+(\\.[0-9]{1,2})?$", message = "Amount must be a valid number with up to 2 decimal places")
     private String amount;
 
+    @JsonProperty("transaction_type")
+    @NotNull(message = "TransactionType should not be null")
     private TransactionType transactionType;
 
-    private String transactionDate;
 }

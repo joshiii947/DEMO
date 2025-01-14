@@ -9,17 +9,18 @@ import org.springframework.stereotype.Component;
 @Component
 public class CustomerAssembler {
 
-    public AccountEntity getAccountEntityInfo(CustomerRequestResource resource, String accountNumber, CustomerEntity customerEntity) {
+    public AccountEntity getAccountEntityInfo(String accountNumber, CustomerEntity customerEntity) {
         AccountEntity accountEntity = new AccountEntity();
         accountEntity.setAccountNumber(accountNumber);
         accountEntity.setCustomerId(customerEntity);
+        accountEntity.setAmount("0");
         return accountEntity;
     }
 
     public CustomerEntity getCustomerEntity(CustomerRequestResource customerRequestResource) {
         CustomerEntity customerEntity = new CustomerEntity();
-        customerEntity.setCustomerId(customerEntity.getCustomerId());
-        customerEntity.setName(customerEntity.getName());
+        customerEntity.setCustomerId(customerRequestResource.getCustomerId());
+        customerEntity.setName(customerRequestResource.getName());
         return customerEntity;
     }
 
@@ -27,7 +28,7 @@ public class CustomerAssembler {
         CustomerResponseResource customerResponseResource = new CustomerResponseResource();
         customerResponseResource.setAccountNumber(accountEntity.getAccountNumber());
         customerResponseResource.setCustomerName(customerRequestResource.getName());
-        customerResponseResource.setCustomerId(customerResponseResource.getCustomerId());
+        customerResponseResource.setCustomerId(customerRequestResource.getCustomerId());
         return customerResponseResource;
     }
 }

@@ -1,8 +1,7 @@
 package com.allica.demo.resource;
 
-import lombok.Data;
+import com.fasterxml.jackson.annotation.JsonProperty;
 
-@Data
 public class CustomerResponseResource {
     public String getCustomerName() {
         return customerName;
@@ -28,9 +27,12 @@ public class CustomerResponseResource {
         this.customerId = customerId;
     }
 
+    @JsonProperty("customer_name")
     private String customerName;
 
+    @JsonProperty("account_number")
     private String accountNumber;
 
+    @JsonProperty("customer_id")
     private String customerId;
 }

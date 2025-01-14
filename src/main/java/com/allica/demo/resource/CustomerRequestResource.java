@@ -1,6 +1,7 @@
 package com.allica.demo.resource;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import com.fasterxml.jackson.annotation.JsonProperty;
 import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Size;
 
@@ -23,9 +24,11 @@ public class CustomerRequestResource {
         this.name = name;
     }
 
+    @JsonProperty("customer_id")
     private String customerId;
 
     @NotNull(message = "Name cannot be null")
     @Size(min = 3, max = 50, message = "Name must be between 7 and 50 characters")
+    @JsonProperty("person_name")
     private String name;
 }

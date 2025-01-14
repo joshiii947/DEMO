@@ -38,7 +38,7 @@ public class CustomerServiceImpl implements CustomerService {
                 isUniqueAccountNumberNotGenerated = false;
             }
         }
-        AccountEntity accountEntity = customerAssembler.getAccountEntityInfo(customerRequestResource, accountNumber, customerEntity);
+        AccountEntity accountEntity = customerAssembler.getAccountEntityInfo(accountNumber, customerEntity);
         saveInfoIndbForAccountEntity(accountEntity);
 
         return customerAssembler.getCustomerResponseResource(accountEntity, customerRequestResource);
@@ -54,12 +54,12 @@ public class CustomerServiceImpl implements CustomerService {
             customerRequestResource.setCustomerId(Constants.generateRandomCustomerId(customerRequestResource.getName()));
         }
 
-        CustomerEntity customerEntityOptional = customerRepo.getCustomerEntityInfo(customerRequestResource.getCustomerId());
-        if (customerEntityOptional == null) {
-            customerEntityOptional = saveInfoInDb(customerRequestResource);
+        CustomerEntity customerEntityInfo  = customerRepo.getCustomerEntityInfo(customerRequestResource.getCustomerId());
+        if (customerEntityInfo == null) {
+            customerEntityInfo = saveInfoInDb(customerRequestResource);
         }
 
-        return customerEntityOptional;
+        return customerEntityInfo;
     }
 
     @Transactional
